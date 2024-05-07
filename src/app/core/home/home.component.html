@@ -1,0 +1,129 @@
+<section class="HomeComponent">
+  <div class="cadastro-veiculo">
+    <h2>Veículos - Administrar</h2>
+    <form [formGroup]="cadastroForm" method="post">
+      <mat-form-field appearance="fill">
+        <mat-label>Modelo</mat-label>
+        <input
+          matInput
+          type="text"
+          id="modelo"
+          formControlName="modelo"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Placa</mat-label>
+        <input
+          matInput
+          type="text"
+          id="placa"
+          formControlName="placa"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="categoria" required>
+          @for (categoria of listaCategorias; track $index) {
+          <mat-option [value]="categoria.id">{{ categoria.nome }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Marca</mat-label>
+        <input matInput type="text" id="marca" formControlName="marca" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Cor</mat-label>
+        <input matInput type="text" id="cor" formControlName="cor" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Preço</mat-label>
+        <input
+          matInput
+          type="number"
+          id="preco"
+          formControlName="preco"
+          step="0.01"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ano</mat-label>
+        <input matInput type="number" id="ano" formControlName="ano" required />
+      </mat-form-field>
+
+      <input
+        id="fileInput"
+        type="file"
+        name="file"
+        (change)="imageUpload($event)"
+      />
+
+      @if (editMode) {
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="sendEdit()"
+      >
+        Salvar Edição
+      </button>
+      } @else {
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onSubmit()"
+      >
+        Salvar
+      </button>
+      }
+    </form>
+  </div>
+  <h2>Lista de Veículos</h2>
+
+  @if (listaVeiculos) {
+  <div class="lista-veiculos">
+    <mat-card class="example-card" *ngFor="let veiculo of listaVeiculos">
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>{{ veiculo.modelo }}</mat-card-title>
+          <mat-card-subtitle>{{ veiculo.ano }}</mat-card-subtitle>
+          <img
+            mat-card-md-image
+            [src]="'http://localhost:8080/imagem/' + veiculo.imagem"
+            alt=""
+          />
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <div>
+          <mat-icon>attach_money</mat-icon>
+          <p class="preco">{{ veiculo.preco }}</p>
+        </div>
+        <div class="buttons">
+          <button mat-button (click)="ver(veiculo.id.toString())">Ver</button>
+          <button mat-button (click)="editar(veiculo.id.toString())">
+            Editar
+          </button>
+          <button mat-button (click)="excluir(veiculo.id.toString())">
+            Excluir
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  } @else if (!listaVeiculos) {
+  <div class="lista-veiculos">
+    <p>Nenhum veículo encontrado</p>
+  </div>
+  }
+</section>

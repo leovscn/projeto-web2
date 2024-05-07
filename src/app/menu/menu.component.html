@@ -1,0 +1,52 @@
+<main>
+  <mat-toolbar color="primary" class="mat-elevation-z8">
+    <button (click)="drawer.toggle()" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button routerLink="" mat-button>Home</button>
+    <span class="example-spacer"></span>
+    <mat-form-field class="example-form-field">
+      <mat-label>Pesquisar Modelo/Ano</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="search"
+        (ngModelChange)="pesquisar()"
+      />
+      <mat-icon matSuffix>search</mat-icon>
+      @if (search) {
+      <button
+        matSuffix
+        mat-icon-button
+        aria-label="Limpar"
+        (click)="search = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+
+    <button mat-button routerLink="">Veículos</button>
+    <button routerLink="categorias" mat-button>Categorias</button>
+  </mat-toolbar>
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer opened="false" mode="over" position="start">
+      <mat-nav-list>
+        <h3 style="padding: 10px">Categorias</h3>
+        @for (categoria of listCategorias; track $index) {
+        <mat-list-item>
+          <button (click)="getByCat(categoria.id)" mat-button>
+            <mat-icon></mat-icon> {{ categoria.nome }}
+          </button>
+        </mat-list-item>
+        }
+      </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div style="text-align: center; height: 100vh">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</main>
+<footer>Desenvolvido por Leonardo Amaral - IFSUL - 2024 - Prog. WEB 2</footer>

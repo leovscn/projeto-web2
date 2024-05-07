@@ -1,0 +1,20 @@
+<section *ngIf="veiculo">
+  <h2>Detalhes do Veículo</h2>
+  <div class="container">
+    <div class="detalhes">
+      <p><strong>Marca:</strong> {{ veiculo.marca }}</p>
+      <p><strong>Modelo:</strong> {{ veiculo.modelo }}</p>
+      <p><strong>Categoria:</strong> {{ veiculo.categoria }}</p>
+      <p><strong>Ano:</strong> {{ veiculo.ano }}</p>
+      <p><strong>Cor:</strong> {{ veiculo.cor }}</p>
+      <p><strong>Placa:</strong> {{ veiculo.placa }}</p>
+      <p><strong>Preço:</strong>R$ {{ veiculo.preco }}</p>
+    </div>
+    <div>
+      <img
+        [src]="'http://localhost:8080/imagem/' + veiculo.imagem"
+        alt="Imagem do Veículo"
+      />
+    </div>
+  </div>
+</section>

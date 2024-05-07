@@ -1,0 +1,25 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+main {
+  background-color: #c3c3c3;
+  mat-toolbar {
+    padding-top: 10px;
+    height: 90px;
+    mat-form-field.example-form-field {
+      margin-top: 15px;
+      padding-right: 20px;
+      mat-icon {
+        color: black;
+      }
+    }
+  }
+}
+footer {
+  width: 100%;
+  height: 50px;
+  color: antiquewhite;
+  display: grid;
+  place-items: center;
+  background-color: #030303;
+}
